@@ -12,7 +12,7 @@ class Body extends StatelessWidget {
           if (snapshot.hasError) {
             return Center(child: Text('${snapshot.error}'));
           } else if (snapshot.hasData) {
-            final data = snapshot.data.toString();
+            final data = snapshot.data as String;
             return Center(
               child: Container(
                 width: 50,
