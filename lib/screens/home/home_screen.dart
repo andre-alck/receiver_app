@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-
-AppBar appBar() {
-  return AppBar(
-    title: const Text('AMQP'),
-  );
-}
+import 'package:flutter_amqp/screens/home/components/appbar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -12,7 +7,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar()
+      appBar: appBar(),
     );
   }
 }
