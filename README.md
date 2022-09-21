@@ -1,16 +1,23 @@
 # flutter_amqp
 
-A new Flutter project.
+Para testes manuais:
 
-## Getting Started
+1. Criar arquivo *.py.
+2. Baixar e instalar a biblioteca "pika";
+3. Adicionar o seguinte código no arquivo criado:
 
-This project is a starting point for a Flutter application.
+```py
+import pika;
 
-A few resources to get you started if this is your first Flutter project:
+connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+channel = connection.channel()
+channel.queue_declare(queue='topic')
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+channel.basic_publish(exchange='', routing_key='topic', body='hello, world!')
+print('Sent \'hello, world!\'')
+
+connection.close()
+```
+
+4. Executar tanto o aplicativo quanto o script.
