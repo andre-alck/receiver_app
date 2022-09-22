@@ -18,7 +18,7 @@ Future<String> receive() async {
 
   String messageReceived = "";
 
-  consumer.listen((message) {
+  consumer.listen((AmqpMessage message) {
     messageReceived = message.payloadAsString;
     print('message_received:\t${message.payloadAsString}');
   });
