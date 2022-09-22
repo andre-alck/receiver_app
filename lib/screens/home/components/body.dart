@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_amqp/receiver_amqp.dart';
 
 class Body extends StatelessWidget {
-  const Body({Key? key, }) : super(key: key);
+  const Body({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +12,11 @@ class Body extends StatelessWidget {
       builder: ((context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
-            return Center(child: Text('${snapshot.error}'));
+            return Center(
+              child: Text(
+                '${snapshot.error}',
+              ),
+            );
           } else if (snapshot.hasData) {
             final data = snapshot.data as String;
             return Center(
@@ -39,8 +45,8 @@ class Body extends StatelessWidget {
         }
 
         return const Center(
-            child: CircularProgressIndicator(),
-          );
+          child: CircularProgressIndicator(),
+        );
       }),
       future: receive(),
     );

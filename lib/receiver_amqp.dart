@@ -2,7 +2,11 @@ import 'package:dart_amqp/dart_amqp.dart';
 import 'dart:io';
 
 Future<String> receive() async {
-  Client client = Client();
+  ConnectionSettings settings = ConnectionSettings(
+    maxConnectionAttempts: 5,
+  );
+
+  Client client = Client(settings: settings);
   ProcessSignal.sigint.watch().listen((message) async {
     await client.close();
     exit(0);
