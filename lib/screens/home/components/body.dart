@@ -6,6 +6,8 @@ class Body extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  // TODO: adicionar como parâmetro a mensagem recebida do AMQP.
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
