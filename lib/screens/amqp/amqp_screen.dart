@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_amqp/receiver_amqp.dart';
+import 'package:flutter_amqp/screens/home/components/body.dart';
 
 class AMQP extends StatefulWidget {
   const AMQP({
@@ -14,15 +15,15 @@ class AMQP extends StatefulWidget {
 
 class _AMQPState extends State<AMQP> {
   Timer? timer;
-  String? message;
+  String message = "";
 
   @override
   void initState() {
     timer = Timer.periodic(
-      const Duration(seconds: 5),
-      (Timer t) async {
-        message = await receive();
+      const Duration(seconds: 30),
+      (Timer t) {
         setState(() {
+          // ideia é buildar periodicamente
         });
       },
     );
@@ -32,14 +33,25 @@ class _AMQPState extends State<AMQP> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text( // TODO: passar argumento "message" para route body
-        '$message',
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 24,
-        ),
-      ),
+    checkMessages(context);
+
+    return const Center(
+      child: Text('Simple page'),
     );
+  }
+
+  void checkMessages(BuildContext context) async {
+    message = await asyncFoo();
+
+    if (message != "") {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Body(
+            message: message,
+          ),
+        ),
+      );
+    }
   }
 }

@@ -3,7 +3,7 @@ import 'dart:io';
 
 Future<String> receive() async {
   ConnectionSettings settings = ConnectionSettings(
-    maxConnectionAttempts: 5,
+    maxConnectionAttempts: 55,
   );
 
   Client client = Client(settings: settings);
@@ -24,4 +24,10 @@ Future<String> receive() async {
   });
 
   return messageReceived;
+}
+
+Future<String> asyncFoo() {
+  return Future.delayed(const Duration(seconds: 2), () {
+    return "I am data";
+  });
 }
