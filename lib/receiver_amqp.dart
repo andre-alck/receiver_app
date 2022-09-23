@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dart_amqp/dart_amqp.dart';
 import 'dart:io';
 
@@ -16,14 +18,11 @@ Future<String> receive() async {
   Queue queue = await channel.queue('topic');
   Consumer consumer = await queue.consume();
 
-  String messageReceived = "";
+  final Completer<String> completer = Completer<String>();
+  consumer.listen(
+      (AmqpMessage message) => completer.complete(message.payloadAsString));
 
-  consumer.listen((AmqpMessage message) {
-    messageReceived = message.payloadAsString;
-    print('message_received:\t${message.payloadAsString}');
-  });
-
-  return messageReceived;
+  return completer.future;
 }
 
 Future<String> asyncFoo() {
