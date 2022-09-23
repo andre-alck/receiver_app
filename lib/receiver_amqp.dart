@@ -3,7 +3,7 @@ import 'dart:io';
 
 Future<String> receive() async {
   ConnectionSettings settings = ConnectionSettings(
-    maxConnectionAttempts: 55,
+    maxConnectionAttempts: 5,
   );
 
   Client client = Client(settings: settings);

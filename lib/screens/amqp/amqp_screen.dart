@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_amqp/receiver_amqp.dart';
-import 'package:flutter_amqp/screens/home/components/body.dart';
 
 class AMQP extends StatefulWidget {
   const AMQP({
@@ -20,7 +19,9 @@ class _AMQPState extends State<AMQP> {
   @override
   void initState() {
     timer = Timer.periodic(
-      const Duration(seconds: 30),
+      const Duration(
+        seconds: 30,
+      ),
       (Timer t) {
         setState(() {
           // ideia é buildar periodicamente
@@ -33,25 +34,52 @@ class _AMQPState extends State<AMQP> {
 
   @override
   Widget build(BuildContext context) {
-    checkMessages(context);
+    return FutureBuilder(
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasError) {
+            return Container(
+              color: Colors.red,
+              child: Center(
+                child: Text(
+                  '${snapshot.error}',
+                ),
+              ),
+            );
+          } else if (snapshot.hasData) {
+            return Container(
+              color: Colors.yellow,
+              child: Center(
+                child: Text(
+                  '${snapshot.data}',
+                ),
+              ),
+            );
+          } else {
+            return Container(
+              color: Colors.purple,
+              child: const Center(
+                child: Text(
+                  'No data.',
+                ),
+              ),
+            );
+          }
+        }
 
-    return const Center(
-      child: Text('Simple page'),
+        return const Center(
+          child: CircularProgressIndicator(
+            backgroundColor: Colors.blue,
+          ),
+        );
+      },
+      future: checkMessages(),
     );
   }
 
-  void checkMessages(BuildContext context) async {
-    message = await asyncFoo();
+  Future<String> checkMessages() async {
+    String message = await receive();
 
-    if (message != "") {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Body(
-            message: message,
-          ),
-        ),
-      );
-    }
+    return message;
   }
 }
