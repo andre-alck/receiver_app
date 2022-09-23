@@ -1,9 +1,10 @@
 import 'dart:async';
 
+import 'package:dart_amqp/dart_amqp.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_amqp/constants.dart';
 import 'package:flutter_amqp/receiver_amqp.dart';
 import 'package:flutter_amqp/setup_consumer.dart';
-import 'package:dart_amqp/dart_amqp.dart';
 
 class AMQP extends StatefulWidget {
   const AMQP({
@@ -48,6 +49,7 @@ class _AMQPState extends State<AMQP> {
               child: Center(
                 child: Text(
                   '${snapshot.error}',
+                  style: defaultText,
                 ),
               ),
             );
@@ -57,15 +59,17 @@ class _AMQPState extends State<AMQP> {
               child: Center(
                 child: Text(
                   '${snapshot.data}',
+                  style: defaultText,
                 ),
               ),
             );
           } else {
             return Container(
               color: Colors.purple,
-              child: const Center(
+              child: Center(
                 child: Text(
                   'No data.',
+                  style: defaultText,
                 ),
               ),
             );

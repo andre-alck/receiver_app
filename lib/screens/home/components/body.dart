@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_amqp/receiver_amqp.dart';
 
 class Body extends StatelessWidget {
   final String message;
@@ -7,8 +6,6 @@ class Body extends StatelessWidget {
     Key? key,
     required this.message,
   }) : super(key: key);
-
-  // TODO: adicionar como parâmetro a mensagem recebida do AMQP.
 
   @override
   Widget build(BuildContext context) {
