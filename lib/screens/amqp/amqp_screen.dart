@@ -82,7 +82,7 @@ class _AMQPState extends State<AMQP> {
           ),
         );
       },
-      future: receive(consumer),
+      future: receive(),
     );
   }
 }

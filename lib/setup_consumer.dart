@@ -15,8 +15,8 @@ Future<Consumer> setupConsumer() async {
   });
 
   Channel channel = await client.channel();
-  Queue queue = await channel.queue('topic');
-  Consumer consumer = await queue.consume();
+  Exchange exchange = await channel.exchange('logs', ExchangeType.FANOUT);
+  Consumer consumer = await exchange.bindPrivateQueueConsumer(null);
 
   return consumer;
 }
