@@ -54,14 +54,9 @@ class _AMQPState extends State<AMQP> {
               ),
             );
           } else if (snapshot.hasData) {
-            return Container(
-              color: Colors.yellow,
-              child: Center(
-                child: Text(
-                  '${snapshot.data}',
-                  style: defaultText,
-                ),
-              ),
+            Future.delayed(
+              Duration.zero,
+              () => _dialog(context),
             );
           } else {
             return Container(
@@ -83,6 +78,31 @@ class _AMQPState extends State<AMQP> {
         );
       },
       future: receive(),
+    );
+  }
+
+  void _dialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Notification'),
+          content: Column(
+            children: [
+              const Text('Notification content here'),
+              MaterialButton(
+                onPressed: () => Navigator.of(context).pop(),
+                color: Colors.red,
+                child: const Text('Close'),
+              ),
+            ],
+          ),
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 100,
+            vertical: 100,
+          ),
+        );
+      },
     );
   }
 }
