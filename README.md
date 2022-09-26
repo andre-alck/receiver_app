@@ -9,13 +9,14 @@ Para testes manuais:
 ```py
 import pika;
 
-connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+parameters = pika.ConnectionParameters(host='localhost')
+connection = pika.BlockingConnection(parameters)
 
 channel = connection.channel()
-channel.queue_declare(queue='topic')
+channel.exchange_declare(exchange='logs', exchange_type='fanout')
+channel.basic_publish(exchange='logs', routing_key='', body='new string message!')
 
-channel.basic_publish(exchange='', routing_key='topic', body='hello, world!')
-print('Sent \'hello, world!\'')
+print('Sent \'new string message!\'')
 
 connection.close()
 ```
