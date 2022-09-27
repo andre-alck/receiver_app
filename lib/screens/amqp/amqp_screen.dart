@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_amqp/components/showNotification.dart';
+import 'package:flutter_amqp/components/show_notification.dart';
 import 'package:flutter_amqp/services/receiver_amqp.dart';
 import 'package:flutter_amqp/theme/constants.dart';
 
