@@ -16,7 +16,6 @@ void showNotification(BuildContext context, String message) {
             MaterialButton(
               onPressed: () async {
                 if (await _isTheRightUser(user)) {
-                  writeUserFile("");
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -44,13 +43,11 @@ void showNotification(BuildContext context, String message) {
 }
 
 Future<bool> _isTheRightUser(String user) async {
-  String userFileContent;
-
   if (!await fileExists()) {
     writeUserFile(user);
   }
 
-  userFileContent = await readUserFile();
+  String userFileContent = await readUserFile();
 
   return userFileContent == user;
 }
