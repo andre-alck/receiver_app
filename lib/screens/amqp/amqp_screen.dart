@@ -16,7 +16,6 @@ class AMQPScreen extends StatefulWidget {
 
 class _AMQPScreenState extends State<AMQPScreen> {
   Timer? timer;
-  String message = "";
 
   @override
   void initState() {
@@ -77,6 +76,4 @@ class _AMQPScreenState extends State<AMQPScreen> {
       future: receive(),
     );
   }
-
-  
 }
