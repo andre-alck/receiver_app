@@ -11,16 +11,21 @@ Future<File> get _localFile async {
   return File('$path/user.txt');
 }
 
-Future<File> writeUser(String user) async {
+Future<File> writeUserFile(String user) async {
   final file = await _localFile;
   return file.writeAsString(user);
 }
 
-Future<String> readUser() async {
+Future<String> readUserFile() async {
   try {
     final file = await _localFile;
     return file.readAsString();
   } catch (e) {
     return 'Error.';
   }
+}
+
+Future<bool> fileExists() async {
+  File file = await _localFile;
+  return file.exists();
 }
