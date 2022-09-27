@@ -1,10 +1,8 @@
 import 'dart:async';
 
-import 'package:dart_amqp/dart_amqp.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_amqp/constants.dart';
-import 'package:flutter_amqp/receiver_amqp.dart';
-import 'package:flutter_amqp/setup_consumer.dart';
+import 'package:flutter_amqp/services/receiver_amqp.dart';
+import 'package:flutter_amqp/theme/constants.dart';
 
 class AMQP extends StatefulWidget {
   const AMQP({
@@ -18,12 +16,9 @@ class AMQP extends StatefulWidget {
 class _AMQPState extends State<AMQP> {
   Timer? timer;
   String message = "";
-  late Future<Consumer> consumer;
 
   @override
   void initState() {
-    consumer = setupConsumer();
-
     timer = Timer.periodic(
       const Duration(
         seconds: 30,

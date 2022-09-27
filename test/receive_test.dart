@@ -1,4 +1,4 @@
-import 'package:flutter_amqp/receiver_amqp.dart';
+import 'package:flutter_amqp/services/receiver_amqp.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
