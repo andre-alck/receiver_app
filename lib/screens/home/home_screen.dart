@@ -9,7 +9,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
-      body: const AMQP(),
+      body: const AMQPScreen(),
     );
   }
 }

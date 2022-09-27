@@ -1,19 +1,20 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_amqp/components/showNotification.dart';
 import 'package:flutter_amqp/services/receiver_amqp.dart';
 import 'package:flutter_amqp/theme/constants.dart';
 
-class AMQP extends StatefulWidget {
-  const AMQP({
+class AMQPScreen extends StatefulWidget {
+  const AMQPScreen({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<AMQP> createState() => _AMQPState();
+  State<AMQPScreen> createState() => _AMQPScreenState();
 }
 
-class _AMQPState extends State<AMQP> {
+class _AMQPScreenState extends State<AMQPScreen> {
   Timer? timer;
   String message = "";
 
@@ -24,9 +25,7 @@ class _AMQPState extends State<AMQP> {
         seconds: 30,
       ),
       (Timer t) {
-        setState(() {
-          // ideia é buildar periodicamente
-        });
+        setState(() {});
       },
     );
 
@@ -51,7 +50,10 @@ class _AMQPState extends State<AMQP> {
           } else if (snapshot.hasData) {
             Future.delayed(
               Duration.zero,
-              () => _dialog(context),
+              () => showNotification(
+                context,
+                snapshot.data as String,
+              ),
             );
           } else {
             return Container(
@@ -76,28 +78,5 @@ class _AMQPState extends State<AMQP> {
     );
   }
 
-  void _dialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Notification'),
-          content: Column(
-            children: [
-              const Text('Notification content here'),
-              MaterialButton(
-                onPressed: () => Navigator.of(context).pop(),
-                color: Colors.red,
-                child: const Text('Close'),
-              ),
-            ],
-          ),
-          insetPadding: const EdgeInsets.symmetric(
-            horizontal: 100,
-            vertical: 100,
-          ),
-        );
-      },
-    );
-  }
+  
 }
